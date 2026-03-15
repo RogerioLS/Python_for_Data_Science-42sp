@@ -37,6 +37,37 @@ docs(notes): add notes on list comprehensions
 fix(ex01): correct off-by-one error in loop
 ```
 
+## Commit emoji hook (per-repository)
+
+This repository includes a small Git hook that prepends an emoji to commit messages
+based on the Conventional Commit `type:` prefix (for example `feat:`, `fix:`), or
+falls back to the branch name when no prefix is present. The hook lives in
+`.git/hooks/prepare-commit-msg` and runs automatically when creating commits.
+
+How it works:
+- If your commit message starts with a Conventional Commit type (e.g. `feat:`),
+    an emoji is prepended (e.g. `✨ feat: ...`).
+- If there is no prefix, the hook looks at the current branch name and selects
+    an emoji by the branch prefix (e.g. `fix/*` → 🐛).
+- If the message already starts with a recognized emoji, the hook does nothing.
+
+Examples:
+
+```
+feat: add progress bar
+# becomes
+✨ feat: add progress bar
+
+fix(parser): handle edge case
+# becomes
+🐛 fix(parser): handle edge case
+```
+
+If you prefer a different emoji mapping, edit `.git/hooks/prepare-commit-msg`.
+If you want this behaviour globally for your account, use a global hooks folder
+and set `git config --global core.hooksPath /path/to/hooks` (not required here).
+
+
 ## Exercise Structure
 
 Every exercise folder must contain:
