@@ -67,6 +67,35 @@ If you prefer a different emoji mapping, edit `.git/hooks/prepare-commit-msg`.
 If you want this behaviour globally for your account, use a global hooks folder
 and set `git config --global core.hooksPath /path/to/hooks` (not required here).
 
+### Installing the hooks from the repository
+
+If you want to enable the emoji hook for this repository, run the helper script from
+the project root:
+
+```bash
+./scripts/install-hooks.sh
+```
+
+This sets the repo's `core.hooksPath` to `.githooks` and ensures the hook is
+executable. Alternatively, to enable manually:
+
+```bash
+chmod +x .githooks/*
+git config core.hooksPath .githooks
+```
+
+To undo the repo-level setting:
+
+```bash
+git config --unset core.hooksPath
+```
+
+Notes:
+- The repository includes `.githooks/prepare-commit-msg` so contributors can
+    enable hooks without needing global configuration.
+- The project also contains a global example in your home folder (optional);
+    keep only one active hooks path to avoid confusion.
+
 
 ## Exercise Structure
 
