@@ -270,6 +270,145 @@ Use Python libraries (`time`, `datetime`) to format and display:
 - seconds since the Unix epoch
 - formatted date output
 
+<details>
+<summary><b>📘 Exercise 01 – Learning Notes</b></summary>
+
+## Exercise 01 – Key Concepts Learned
+
+This exercise introduces how Python interacts with system time and how numeric and date values can be formatted for human-readable output.
+
+The goal is not only to obtain the current timestamp, but also to understand **Unix time, numeric formatting, scientific notation, and date formatting in Python**.
+
+---
+
+### 1. Unix Timestamp
+
+Python can retrieve the current time as a **Unix timestamp**, which represents the number of seconds that have elapsed since:
+
+```
+January 1, 1970 (00:00:00 UTC)
+```
+
+This reference point is known as the **Unix Epoch**.
+
+Example in Python:
+
+```python
+import time
+
+timestamp = time.time()
+```
+
+This returns a floating-point number such as:
+
+```
+1713648000.1234
+```
+
+The decimal part represents **fractions of a second**.
+
+---
+
+### 2. Numeric Formatting
+
+Python allows numbers to be formatted using **format specifiers** inside f-strings.
+
+Example:
+
+```python
+f"{timestamp:,.4f}"
+```
+
+Explanation of the format:
+
+| Specifier | Meaning |
+|----------|--------|
+| `,` | Adds thousands separators |
+| `.4f` | Keeps 4 decimal places |
+| `f` | Fixed-point notation |
+
+Example output:
+
+```
+1,713,648,000.1234
+```
+
+This improves readability for large numbers.
+
+---
+
+### 3. Scientific Notation
+
+Scientific notation expresses large numbers in the form:
+
+```
+a × 10ⁿ
+```
+
+Python formats numbers this way using the `e` format specifier.
+
+Example:
+
+```python
+f"{timestamp:.2e}"
+```
+
+Explanation:
+
+| Specifier | Meaning |
+|----------|--------|
+| `.2` | Two digits after the decimal |
+| `e` | Scientific notation |
+
+Example output:
+
+```
+1.71e+09
+```
+
+This format is widely used in **scientific computing and data science**.
+
+---
+
+### 4. Date Formatting with `strftime`
+
+Python's `time` module can convert timestamps into human-readable date formats.
+
+Example:
+
+```python
+time.strftime("%b %d %Y", time.localtime())
+```
+
+Format codes used:
+
+| Code | Meaning | Example |
+|-----|--------|--------|
+| `%b` | Month abbreviation | Oct |
+| `%d` | Day of month | 21 |
+| `%Y` | Full year | 2022 |
+
+Example result:
+
+```
+Oct 21 2022
+```
+
+---
+
+### Summary
+
+| Concept | Purpose |
+|-------|--------|
+| `time.time()` | Retrieve Unix timestamp |
+| Numeric formatting (`:,.4f`) | Improve readability of large numbers |
+| Scientific notation (`:.2e`) | Represent large numbers compactly |
+| `strftime()` | Format dates for human-readable output |
+
+This exercise demonstrates how Python can **retrieve system time and present it in different numeric and textual formats**, which is a common requirement in logging systems, data processing, and scientific applications.
+
+</details>
+
 ---
 
 ## ex02 – First Function
