@@ -18,40 +18,46 @@ if echo "$FIRST_LINE" | grep -qE '^(✨|🐛|📝|🔧|♻️|✅|💄|🚀|🔥
   exit 0
 fi
 
-# Prefer Conventional Commit prefix (type: or type(scope):)
-TYPE_PREFIX=$(echo "$FIRST_LINE" | sed -E 's/^([a-z]+)(\([^)]+\))?:.*$/\1/' | tr '[:upper:]' '[:lower:]')
+# Extract all Conventional Commit type prefixes in the first line (supports multiple)
+# Example: "feat(new): ... test(add): ..." -> types: feat, test
+mapfile -t TYPE_LIST < <(echo "$FIRST_LINE" | grep -oE '([a-z]+)(\([^)]+\))?:' | sed -E 's/^([a-z]+).*/\1/' | tr '[:upper:]' '[:lower:]' || true)
 
-EMOJI="✨"
-case "$TYPE_PREFIX" in
-  feat) EMOJI="✨";;
-  fix) EMOJI="🐛";;
-  docs) EMOJI="📝";;
-  chore) EMOJI="🔧";;
-  refactor) EMOJI="♻️";;
-  test) EMOJI="✅";;
-  style) EMOJI="💄";;
-  perf) EMOJI="🚀";;
-  ci) EMOJI="🔒";;
-  build) EMOJI="🐧";;
-  *)
-    # Fallback: try branch name
-    BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
-    case "$BRANCH" in
-      feat/*|feature/*) EMOJI="✨";;
-      fix/*|bugfix/*) EMOJI="🐛";;
-      docs/*|doc/*) EMOJI="📝";;
-      chore/*) EMOJI="🔧";;
-      refactor/*) EMOJI="♻️";;
-      test/*|tests/*) EMOJI="✅";;
-      style/*) EMOJI="💄";;
-      release/*) EMOJI="🚀";;
-      hotfix/*) EMOJI="🔥";;
-      *) EMOJI="✨";;
-    esac
-    ;;
-esac
+EMOJIS=""
+for t in "${TYPE_LIST[@]}"; do
+  case "$t" in
+    feat) e="✨";;
+    fix) e="🐛";;
+    docs) e="📝";;
+    chore) e="🔧";;
+    refactor) e="♻️";;
+    test) e="✅";;
+    style) e="💄";;
+    perf) e="🚀";;
+    ci) e="🔒";;
+    build) e="🐧";;
+    *) e="";;
+  esac
+  EMOJIS+="$e"
+done
 
-# Prepend emoji + space to first line of commit message
-sed -i "1s/^/${EMOJI} /" "$COMMIT_MSG_FILE"
+if [[ -z "$EMOJIS" ]]; then
+  # Fallback: single emoji based on branch name
+  BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
+  case "$BRANCH" in
+    feat/*|feature/*) EMOJIS="✨";;
+    fix/*|bugfix/*) EMOJIS="🐛";;
+    docs/*|doc/*) EMOJIS="📝";;
+    chore/*) EMOJIS="🔧";;
+    refactor/*) EMOJIS="♻️";;
+    test/*|tests/*) EMOJIS="✅";;
+    style/*) EMOJIS="💄";;
+    release/*) EMOJIS="🚀";;
+    hotfix/*) EMOJIS="🔥";;
+    *) EMOJIS="✨";;
+  esac
+fi
+
+# Prepend emojis followed by a space to the first line
+sed -i "1s/^/${EMOJIS} /" "$COMMIT_MSG_FILE"
 
 exit 0
