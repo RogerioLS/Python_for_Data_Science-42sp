@@ -1278,3 +1278,108 @@ This module focuses on developing the following skills:
 # Author
 
 Student at **42 School – Piscine Python for Data Science**
+---
+
+## ex06 – Custom Filter
+
+Reimplementing Python's built-in `filter()` function using list comprehensions.
+
+<details>
+<summary><b>📘 Exercise 06 – Learning Notes</b></summary>
+
+## Exercise 06 – Key Concepts Learned
+
+This exercise explores **functional programming** concepts in Python, specifically focusing on filtering iterables and the use of anonymous functions.
+
+### 1. High-Order Functions
+A function that takes another function as an argument. `ft_filter` mimics this by receiving a logic (function) and data (iterable).
+
+### 2. List Comprehension
+Used as a powerful tool to replace traditional loops and the `filter()` function itself.
+```python
+[item for item in iterable if function(item)]
+```
+
+### 3. Lambda Functions
+Anonymized, one-liner functions used for quick logic without formal definition.
+```python
+lambda x: len(x) > n
+```
+
+### 4. Docstrings Replicability
+The exercise requires `ft_filter.__doc__` to be identical to `filter.__doc__`, demonstrating how Python stores documentation as metadata.
+
+</details>
+
+---
+
+## ex07 – Morse Code Encoder
+
+A program to encode alphanumeric strings into Morse code using a dictionary.
+
+<details>
+<summary><b>📘 Exercise 07 – Learning Notes</b></summary>
+
+## Exercise 07 – Key Concepts Learned
+
+Focuses on **data mapping** and robust input validation.
+
+### 1. Dictionary Mapping (Hash Maps)
+Using `NESTED_MORSE` to store key-value pairs for characters. Lookups in a dictionary are $O(1)$, making it the most efficient way to translate characters.
+
+### 2. String Manipulation
+Using `.upper()` to normalize input and `.strip()` to handle trailing spaces in the formatted output.
+
+### 3. Robustness
+The program must handle non-alphanumeric characters (like symbols) by raising an `AssertionError`, ensuring it doesn't process invalid data.
+
+</details>
+
+---
+
+## ex08 – Progress Bar (tqdm clone)
+
+Creating an automated progress bar for iterables using the `yield` operator.
+
+<details>
+<summary><b>📘 Exercise 08 – Learning Notes</b></summary>
+
+## Exercise 08 – Key Concepts Learned
+
+Deep dive into **Generators** and terminal output control.
+
+### 1. The `yield` Operator
+Transforms a regular function into a **Generator**. It allows the function to "pause" and return a value while keeping its internal state for the next iteration.
+
+### 2. Carriage Return (`\r`)
+Crucial for terminal UIs. `\r` moves the cursor to the start of the current line without advancing to the next, allowing the program to overwrite the progress bar.
+
+### 3. Dynamic Terminal Sizing
+Using `os.get_terminal_size()` to ensure the bar scales correctly regardless of the window width.
+
+</details>
+
+---
+
+## ex09 – Python Package Creation
+
+The final step: creating a distributable Python package.
+
+<details>
+<summary><b>📘 Exercise 09 – Learning Notes</b></summary>
+
+## Exercise 09 – Key Concepts Learned
+
+Standardizing Python code for distribution.
+
+### 1. `pyproject.toml`
+The modern standard (PEP 517/518) for defining package metadata, dependencies, and build systems.
+
+### 2. Package Structure
+Learning the difference between source code and build artifacts. Using `src/` layout to prevent accidental imports.
+
+### 3. Distribution Tools
+Using `build` to generate `.whl` (Wheel) and `.tar.gz` (Source Distribution) files, and `pip` to install them locally.
+
+</details>
+

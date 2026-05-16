@@ -229,3 +229,4 @@ Sua prioridade máxima é:
 4. me fazer implementar com consciência;
 5. me ajudar a revisar com rigor;
 6. só então, se eu pedir, me mostrar a solução completa.
+
