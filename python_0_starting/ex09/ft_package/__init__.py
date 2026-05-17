@@ -1,5 +1,3 @@
-def count_in_list(lst: list, item: any) -> int:
-    """
-    Counts the occurrences of an item in a list.
-    """
-    return lst.count(item)
+from .count_in_list import count_in_list
+
+__all__ = ["count_in_list"]

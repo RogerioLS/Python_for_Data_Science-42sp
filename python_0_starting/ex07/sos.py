@@ -2,7 +2,12 @@ import sys
 
 
 def main():
-    """Converts a string to Morse code based on a nested dictionary."""
+    """
+    Convert a string to Morse code.
+
+    Returns:
+        None
+    """
     NESTED_MORSE = {
         " ": "/ ", "A": ".- ", "B": "-... ", "C": "-.-. ", "D": "-.. ",
         "E": ". ", "F": "..-. ", "G": "--. ", "H": ".... ", "I": ".. ",

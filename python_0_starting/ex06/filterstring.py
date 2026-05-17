@@ -2,7 +2,12 @@ import sys
 
 
 def main():
-    """Program that filters words from a string based on length."""
+    """
+    Filter words by minimum length.
+
+    Returns:
+        None
+    """
     try:
         if len(sys.argv) != 3:
             raise AssertionError("the arguments are bad")

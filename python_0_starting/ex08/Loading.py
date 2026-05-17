@@ -4,7 +4,13 @@ import sys
 
 def ft_tqdm(lst: range) -> None:
     """
-    A simplified version of tqdm using yield.
+    Yield items while printing a progress bar.
+
+    Args:
+        lst (range): The iterable to wrap.
+
+    Yields:
+        int: The next item from the iterable.
     """
     total = len(lst)
     for i, item in enumerate(lst):

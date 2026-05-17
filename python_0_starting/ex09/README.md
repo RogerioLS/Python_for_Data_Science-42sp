@@ -1,26 +1,43 @@
-# Exercise 09 — Title
+# How to Build and Install `ft_package`
 
-## Objective
+1. **Build the package**
 
-Describe what this exercise is practicing.
+    Inside the `ft_package` folder, run:
 
-## Instructions
+    ```bash
+    python -m build
+    ```
 
-1. Step one
-2. Step two
-3. Step three
+    This command uses the `pyproject.toml` file to instruct Python how to build the package. The build artifacts will be created in the `dist/` directory.
 
-## Requirements
+2. **Install the package**
 
-- _List any requirements or constraints here._
+    To install the package using `pip`, run one of the following commands:
 
-## Implementation Notes
+    ```bash
+    pip install ./dist/ft_package-0.0.1.tar.gz
+    ```
 
-- _Add notes about your approach here._
+    or
 
-## Example
+    ```bash
+    pip install ./dist/ft_package-0.0.1-py3-none-any.whl
+    ```
 
-```
-Input:  ...
-Output: ...
-```
+3. **Test the package**
+
+    After installation, you can test the package by running:
+
+    ```bash
+    python3 ../tester.py
+    ```
+
+4. **Uninstall the package**
+
+    If you need to remove the package, use:
+
+    ```bash
+    pip uninstall ft_package
+    ```
+
+    This will uninstall `ft_package` from your Python environment.
