@@ -4,25 +4,20 @@ import sys
 
 def validate_arguments(arguments: list[str]) -> str:
     """
-    Validate command line arguments and return the text to analyze.
-
-    If no argument is provided, prompts the user for input.
-    If more than one argument is provided, raises an AssertionError.
+    Validate the command-line arguments.
 
     Args:
-        arguments (list[str]): List of command line arguments (sys.argv[1:]).
+        arguments (list[str]): Command-line arguments.
 
     Returns:
-        str: The text to be analyzed.
+        str: The text to analyze.
 
     Raises:
         AssertionError: If more than one argument is provided.
     """
     if len(arguments) == 0:
-        try:
-            return input("What is the text to count?\n")
-        except (EOFError, KeyboardInterrupt):
-            return ""
+        print("What is the text to count?")
+        return sys.stdin.readline()
     if len(arguments) > 1:
         raise AssertionError("more than one argument is provided")
     return arguments[0]
@@ -30,20 +25,13 @@ def validate_arguments(arguments: list[str]) -> str:
 
 def count_types(text: str) -> dict[str, int]:
     """
-    Count different types of characters in the given text.
-
-    Categories:
-    - upper: uppercase letters
-    - lower: lowercase letters
-    - punctuation: punctuation marks
-    - spaces: whitespace characters
-    - digits: numeric digits
+    Count character categories in the text.
 
     Args:
         text (str): The text to analyze.
 
     Returns:
-        dict[str, int]: Dictionary with counts of each category.
+        dict[str, int]: Counts for each character category.
     """
     types = {
         "upper": 0,
@@ -70,10 +58,7 @@ def count_types(text: str) -> dict[str, int]:
 
 def main():
     """
-    Main entry point of the program.
-
-    Handles argument validation, text input, character analysis,
-    and formatted output.
+    Run the program.
     """
     try:
         arguments = sys.argv[1:]

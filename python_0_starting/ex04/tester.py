@@ -42,7 +42,7 @@ def main():
 		(
 			"mais de um argumento",
 			["13", "5"],
-			"AssertionError: more than one argument is provided",
+			"AssertionError: more than one argument are provided",
 		),
 	]
 

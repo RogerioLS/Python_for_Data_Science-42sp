@@ -1,5 +1,6 @@
 import math
 
+
 def NULL_not_found(obj: any) -> int:
     """
     Check if the given object is a "NULL" value and print its type and name.
