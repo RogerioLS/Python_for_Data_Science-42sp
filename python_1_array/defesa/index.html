@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>42 Python Piscine - Module 01 Defense Guide</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --accent-gradient: linear-gradient(135deg, #f02fc2 0%, #6094ea 100%);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --neon-blue: #00f2fe;
+            --neon-pink: #f02fc2;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(240, 47, 194, 0.05) 0%, transparent 40%);
+        }
+
+        header {
+            padding: 2rem 5%;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            background: rgba(11, 15, 25, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .header-title p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .badge {
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--neon-blue);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+            gap: 2rem;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .nav-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 100px;
+        }
+
+        .nav-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            padding-left: 0.5rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item a:hover {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+            padding-left: 1.2rem;
+        }
+
+        .nav-item.active a {
+            background: rgba(0, 242, 254, 0.08);
+            color: #ffffff;
+            border-left-color: var(--neon-blue);
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title h2 span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.4rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 968px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .full-width {
+                grid-column: span 2;
+            }
+        }
+
+        .info-block {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .info-block h4 {
+            font-size: 1.05rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-block h4::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background: var(--neon-blue);
+            border-radius: 2px;
+        }
+
+        .info-block.accent h4::before {
+            background: var(--neon-pink);
+        }
+
+        .info-block p, .info-block li {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .info-block ul {
+            list-style-position: inside;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        /* Highlights & Alerts */
+        .defense-tip {
+            border-left: 4px solid var(--neon-pink);
+            background: rgba(240, 47, 194, 0.05);
+            padding: 1.25rem;
+            border-radius: 0 12px 12px 0;
+            margin-top: 1rem;
+        }
+
+        .defense-tip p {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .defense-tip span {
+            color: var(--neon-pink);
+            font-weight: 700;
+        }
+
+        /* Code Block Styling */
+        pre {
+            background: #05070c;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-top: 0.8rem;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #e5e7eb;
+        }
+
+        .cmd {
+            color: var(--neon-blue);
+        }
+
+        .output-tag {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            backdrop-filter: blur(12px);
+        }
+
+        .pending-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.01);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .pending-card svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            stroke: var(--text-secondary);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>42 Python Piscine - Module 01 Defense Guide</h1>
+            <p>Peer-to-Peer Defense Study Guide & Knowledge Sheet</p>
+        </div>
+        <span class="badge">MODULE 01: ARRAY</span>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside>
+            <nav class="nav-card">
+                <h3>Exercises</h3>
+                <ul class="nav-list">
+                    <li class="nav-item active"><a href="#ex00">ex00: Give my BMI</a></li>
+                    <li class="nav-item"><a href="#ex01">ex01: 2D Array</a></li>
+                    <li class="nav-item"><a href="#ex02">ex02: Load my image</a></li>
+                    <li class="nav-item"><a href="#ex03">ex03: Zoom on me</a></li>
+                    <li class="nav-item"><a href="#ex04">ex04: Rotate me</a></li>
+                    <li class="nav-item"><a href="#ex05">ex05: Pimp my image</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Exercise 00 -->
+            <section id="ex00" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex00: <span>Give my BMI</span></h2>
+                        <p>File to turn in: <code>give_bmi.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+
+                <div class="grid">
+                    <!-- Left: Objective & Code -->
+                    <div class="info-block">
+                        <h4>Objective & Solution Summary</h4>
+                        <p>Calculate the Body Mass Index (BMI) from lists of heights (meters) and weights (kilograms), and filter them against an integer limit threshold.</p>
+                        <br>
+                        <p>Implemented vectorized calculation using <strong>NumPy</strong> to perform division and exponentiation efficiently on full lists instead of looping manually.</p>
+                        <pre><code><span class="cmd"># BMI Formula used in numpy</span>
+h_arr = np.array(height, dtype=float)
+w_arr = np.array(weight, dtype=float)
+bmi_arr = w_arr / (h_arr ** 2)</code></pre>
+                    </div>
+
+                    <!-- Right: Critical Validation -->
+                    <div class="info-block accent">
+                        <h4>Critical Validation Checks</h4>
+                        <ul>
+                            <li><strong>List Sizes:</strong> Validated that <code>len(height) == len(weight)</code>, raising <code>ValueError</code> if they differ.</li>
+                            <li><strong>Zero/Negative Values:</strong> Height or weight $\le 0$ raises <code>ValueError</code> to prevent impossible BMIs and division by zero.</li>
+                            <li><strong>Type Enforcement:</strong> All items in lists must be <code>int</code> or <code>float</code>, raising <code>TypeError</code> otherwise.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Full Width: Defense Explanations -->
+                    <div class="info-block full-width">
+                        <h4>How to Defend (Why & Q&A)</h4>
+                        
+                        <div class="defense-tip">
+                            <p><span>Q: Why use NumPy arrays instead of a standard loop?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                                "NumPy enables <strong>vectorization</strong> (vectorized operations). Pure Python loops are slow because Python has to check types on every single iteration. NumPy compiles the loop in C, allocating contiguous blocks of memory, executing math operations simultaneously across the array."
+                            </p>
+                        </div>
+
+                        <div class="defense-tip" style="border-left-color: var(--neon-blue); background: rgba(0, 242, 254, 0.05);">
+                            <p><span>Q: Why check types using `type(x) not in (int, float)` instead of `isinstance`?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                                "In Python, <code>bool</code> is a subclass of <code>int</code> (i.e., <code>isinstance(True, int)</code> evaluates to <code>True</code>). If we used <code>isinstance</code>, boolean values like <code>True</code> or <code>False</code> would bypass the check and behave like <code>1</code> or <code>0</code>, corrupting the BMI formula. Using <code>type()</code> guarantees strict type checks."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Full Width: Verification Commands -->
+                    <div class="info-block full-width">
+                        <h4>Verification Commands & Output</h4>
+                        <pre><code><span class="cmd">python main.py</span>
+
+<span class="output-tag">--- Subject Test Case ---</span>
+[22.507863455018317, 29.0359168241966] &lt;class 'list'&gt;
+[False, True]
+
+<span class="output-tag">--- Error Case: Different list sizes ---</span>
+Caught expected ValueError: Height and weight lists must have the same size.
+
+<span class="output-tag">--- Error Case: Non-numeric elements ---</span>
+Caught expected TypeError: List elements must be integers or floats.</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exercise 01 -->
+            <section id="ex01" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex01: <span>2D Array</span></h2>
+                        <p>File to turn in: <code>array2D.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+
+                <div class="grid">
+                    <!-- Left: Objective & Code -->
+                    <div class="info-block">
+                        <h4>Objective & Solution Summary</h4>
+                        <p>Inspect the shape of a 2D array, slice it row-wise using Python native slicing, print the shapes, and return the sliced list.</p>
+                        <br>
+                        <p>Leverages <strong>NumPy</strong> to fetch the shape tuple effortlessly, keeping the actual slice native to Python.</p>
+                        <pre><code><span class="cmd"># Retrieve shape using NumPy</span>
+arr = np.array(family)
+print(f"My shape is : {arr.shape}")
+sliced = family[start:end]
+print(f"My new shape is : {np.array(sliced).shape}")</code></pre>
+                    </div>
+
+                    <!-- Right: Critical Validation -->
+                    <div class="info-block accent">
+                        <h4>Critical Validation Checks</h4>
+                        <ul>
+                            <li><strong>Type Verification:</strong> Validated that <code>family</code> is a list, and that <code>start</code> and <code>end</code> are integers (preventing booleans).</li>
+                            <li><strong>Nested Type Verification:</strong> Verified that every row in the outer list is a list itself.</li>
+                            <li><strong>Inconsistent Row Sizes:</strong> Checked that all rows share the same length, raising a <code>ValueError</code> if they differ.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Full Width: Defense Explanations -->
+                    <div class="info-block full-width">
+                        <h4>How to Defend (Why & Q&A)</h4>
+                        
+                        <div class="defense-tip">
+                            <p><span>Q: How does Python native slicing differ from NumPy slicing?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                                "Native Python list slicing on a 2D list only cuts rows (first dimension), because lists are 1D containers of other lists. NumPy slicing allows multi-dimensional index slicing (e.g., `arr[start:end, col_start:col_end]`), which is faster and allows sub-matrix slicing."
+                            </p>
+                        </div>
+
+                        <div class="defense-tip" style="border-left-color: var(--neon-blue); background: rgba(0, 242, 254, 0.05);">
+                            <p><span>Q: What happens if rows have different sizes?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                                "If rows have different lengths, the structure is not a proper 2D array. When converted to NumPy, it becomes a 1D array of `object` dtype (shape `(N,)`), instead of a `(N, M)` matrix. That's why we explicitly validate row sizes and raise a `ValueError`."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Full Width: Verification Commands & Output -->
+                    <div class="info-block full-width">
+                        <h4>Verification Commands & Output</h4>
+                        <pre><code><span class="cmd">python main.py</span>
+
+<span class="output-tag">--- Subject Test Case ---</span>
+My shape is : (4, 2)
+My new shape is : (2, 2)
+[[2.15, 102.7], [2.10, 98.5]]
+My shape is : (4, 2)
+My new shape is : (1, 2)
+[[2.15, 102.7]]
+
+<span class="output-tag">--- Error Case: Inconsistent row sizes ---</span>
+Caught expected ValueError: All rows in the 2D array must have the same size</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exercise 02 -->
+            <section id="ex02" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex02: <span>Load my image</span></h2>
+                        <p>File to turn in: <code>load_image.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+
+                <div class="grid">
+                    <!-- Left: Objective & Code -->
+                    <div class="info-block">
+                        <h4>Objective & Solution Summary</h4>
+                        <p>Load an image file (e.g. JPG or JPEG), print its dimensions (shape), and return its RGB pixel contents in a NumPy array format.</p>
+                        <br>
+                        <p>Uses <strong>Pillow (PIL)</strong> for image handling, explicitly converting the image format to RGB, and then converting the image into a NumPy array.</p>
+                        <pre><code><span class="cmd"># Image loading logic</span>
+with Image.open(path) as img:
+    img_rgb = img.convert("RGB")
+    img_array = np.array(img_rgb)
+    print(f"The shape of image is: {img_array.shape}")
+    return img_array</code></pre>
+                    </div>
+
+                    <!-- Right: Critical Validation -->
+                    <div class="info-block accent">
+                        <h4>Critical Validation Checks</h4>
+                        <ul>
+                            <li><strong>Missing File:</strong> Catches <code>FileNotFoundError</code> if the target file does not exist.</li>
+                            <li><strong>Corrupted or Bad Format:</strong> Catches <code>PIL.UnidentifiedImageError</code> if the file exists but isn't an image.</li>
+                            <li><strong>Wrong Type:</strong> Validates path type is string, catching <code>TypeError</code> otherwise.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Full Width: Defense Explanations -->
+                    <div class="info-block full-width">
+                        <h4>How to Defend (Why & Q&A)</h4>
+                        
+                        <div class="defense-tip">
+                            <p><span>Q: Why is it important to explicitly convert the image using `img.convert("RGB")`?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                                "Images can come in various modes, such as Grayscale (L), RGBA (with transparency channel), or Palette-based (P). Explicitly converting using <code>convert("RGB")</code> guarantees that we always receive a uniform 3-channel array (Red, Green, Blue) of shape (Height, Width, 3), preventing dimensional mismatches in downstream tasks."
+                            </p>
+                        </div>
+
+                        <div class="defense-tip" style="border-left-color: var(--neon-blue); background: rgba(0, 242, 254, 0.05);">
+                            <p><span>Q: How are errors handled in `ft_load` to prevent the program from crashing?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                                "We wrap the Pillow loading function in a try-except block, catching specific exceptions like <code>FileNotFoundError</code>, <code>UnidentifiedImageError</code>, and generic <code>Exception</code>. If an error is caught, we print a descriptive message and return <code>None</code>, preventing unhandled exception crashes."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Full Width: Verification Commands & Output -->
+                    <div class="info-block full-width">
+                        <h4>Verification Commands & Output</h4>
+                        <pre><code><span class="cmd">python main.py</span>
+
+<span class="output-tag">--- Test 1: Subject Test Case (Valid Image) ---</span>
+The shape of image is: (1024, 768, 3)
+[[[120 110  97]
+  [121 111  98]
+  [123 113 100]
+  ...
+  [ 55  35  14]
+  [ 57  37  16]
+  [ 58  38  17]]
+
+ [[120 110  97]
+  [121 111  98]
+  [123 113 100]
+  ...
+  ...
+  [ 55  35  14]
+  [ 57  37  16]
+  [ 58  38  17]]]
+
+<span class="output-tag">--- Test 2: Non-existent Image File ---</span>
+Error: The file at 'nonexistent.jpg' was not found.
+None
+
+<span class="output-tag">--- Test 3: Invalid Type for Path ---</span>
+Error: Path must be a string.
+None</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exercise 03 -->
+            <section id="ex03" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex03: <span>Zoom on me</span></h2>
+                        <p>Files to turn in: <code>load_image.py, zoom.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+
+                <div class="grid">
+                    <!-- Left: Objective & Code -->
+                    <div class="info-block">
+                        <h4>Objective & Solution Summary</h4>
+                        <p>Load an image file, display its dimensions and content, slice a 400x400 area with a single color channel (grayscale) and display it with X and Y axis coordinate scales.</p>
+                        <br>
+                        <p>Uses <strong>NumPy slicing</strong> to crop the image array, and <strong>Matplotlib</strong> to draw it using a grayscale colormap with native axis scale ticks.</p>
+                        <pre><code><span class="cmd"># Slice to 400x400 with 1 color channel</span>
+sliced = img[100:500, 380:780, 0:1]
+print(f"New shape after slicing: {sliced.shape} or {sliced.shape[:2]}")</code></pre>
+                    </div>
+
+                    <!-- Right: Critical Validation -->
+                    <div class="info-block accent">
+                        <h4>Critical Validation Checks</h4>
+                        <ul>
+                            <li><strong>Grayscale Colormap:</strong> Used <code>cmap="gray"</code> inside <code>plt.imshow()</code> to display the single channel correctly.</li>
+                            <li><strong>Axis Scales:</strong> Kept axes visible so coordinate scales (0 to 400) appear on both X and Y dimensions.</li>
+                            <li><strong>Exceptions & Safety:</strong> Wrapped execution in a try-except block to catch <code>FileNotFoundError</code>, <code>ImportError</code>, or Matplotlib rendering failures gracefully.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Full Width: Defense Explanations -->
+                    <div class="info-block full-width">
+                        <h4>How to Defend (Why & Q&A)</h4>
+                        
+                        <div class="defense-tip">
+                            <p><span>Q: How does slicing `img[100:500, 380:780, 0:1]` isolate the raccoon and shape it?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                                "Slicing specifies `[start_y:end_y, start_x:end_x, start_channel:end_channel]`. This selects a height of 400 pixels (from index 100 to 499), a width of 400 pixels (from index 380 to 779), and keeps only the first channel (Red channel, index 0). This results in a shape of `(400, 400, 1)`."
+                            </p>
+                        </div>
+
+                        <div class="defense-tip" style="border-left-color: var(--neon-blue); background: rgba(0, 242, 254, 0.05);">
+                            <p><span>Q: Why does the print statement show `(400, 400, 1) or (400, 400)`?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                                "The sliced array has 3 dimensions `(400, 400, 1)` because of the slice range `0:1` on the channel dimension. However, `sliced.shape[:2]` drops the channel dimension, giving `(400, 400)`, which represents a 2D image matrix."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Full Width: Verification Commands & Output -->
+                    <div class="info-block full-width">
+                        <h4>Verification Commands & Output</h4>
+                        <pre><code><span class="cmd">python main.py</span>
+
+The shape of image is: (768, 1024, 3)
+[[[120 110  97]
+  [121 111  98]
+  [123 113 100]
+  ...
+  [ 55  35  14]
+  [ 57  37  16]
+  [ 58  38  17]]
+  ...
+]
+New shape after slicing: (400, 400, 1) or (400, 400)
+[[[167]
+  [180]
+  [193]
+  ...
+  [101]
+  [101]
+  [101]]
+  ...
+]</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Placeholder Exercise 04 -->
+            <section id="ex04" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex04: <span>Rotate me</span></h2>
+                        <p>Files to turn in: <code>load_image.py, rotate.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: var(--warning-color);">PENDING</span>
+                </div>
+                <div class="pending-card">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    <p>Pending implementation. Content will be added here once ex04 is completed.</p>
+                </div>
+            </section>
+
+            <!-- Placeholder Exercise 05 -->
+            <section id="ex05" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex05: <span>Pimp my image</span></h2>
+                        <p>Files to turn in: <code>load_image.py, pimp_image.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: var(--warning-color);">PENDING</span>
+                </div>
+                <div class="pending-card">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    <p>Pending implementation. Content will be added here once ex05 is completed.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2026 42 Piscine Python for Data Science. Developed for peer review support.</p>
+    </footer>
+
+    <script>
+        // Simple active scroll highlighting for sidebar
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.querySelector('a').getAttribute('href').slice(1) === current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

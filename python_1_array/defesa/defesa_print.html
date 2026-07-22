@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>42 Python Piscine - Module 01 Colinha de Defesa (Versão para Impressão)</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #000;
+            background: #fff;
+            line-height: 1.5;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 24px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        strong {
+            font-weight: 700;
+        }
+        code, pre {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 13px;
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        pre {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid #ddd;
+        }
+        .q-block {
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 3px solid #000;
+        }
+        .q-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        @media print {
+            body {
+                padding: 0;
+                font-size: 12px;
+            }
+            .no-print {
+                display: none;
+            }
+            h2 {
+                page-break-before: always;
+            }
+            h2:first-of-type {
+                page-break-before: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>42 Python Piscine - Módulo 01 Colinha de Estudo para Defesa</h1>
+    <p class="no-print" style="color: #666; font-style: italic; text-align: center; margin-bottom: 30px;">
+        Esta página está otimizada para impressão. Pressione <strong>Ctrl + P</strong> (ou Cmd + P) para imprimir ou salvar como PDF.
+    </p>
+
+    <!-- ex00 -->
+    <h2>ex00: Give my BMI</h2>
+    <ul>
+        <li><strong>Arquivos de entrega:</strong> <code>give_bmi.py</code></li>
+        <li><strong>Objetivo:</strong> Calcular o IMC ($peso / altura^2$) e verificar se os elementos da lista excedem um limite especificado.</li>
+    </ul>
+
+    <div class="q-block">
+        <div class="q-title">P: Por que usar arrays do NumPy em vez de loops padrão do Python?</div>
+        <div>O NumPy permite **operações vetorizadas** (vectorized operations). Loops normais do Python são lentos porque precisam verificar dinamicamente o tipo das variáveis a cada iteração. O NumPy executa as operações matemáticas de forma concorrente em blocos contíguos de memória utilizando código C pré-compilado, tornando-o extremamente eficiente.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">P: Por que validar os tipos na lista com `type(x) not in (int, float)` em vez de `isinstance`?</div>
+        <div>No Python, <code>bool</code> é uma subclasse de <code>int</code> (portanto <code>isinstance(True, int)</code> avalia para <code>True</code>). O uso de <code>isinstance</code> aceitaria incorretamente booleanos como números válidos nas listas, corrompendo o cálculo do IMC. O uso de <code>type()</code> direto previne essa falha.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">P: Como a divisão por zero é evitada?</div>
+        <div>Nós validamos explicitamente se todos os elementos nas listas de altura e peso são estritamente maiores do que zero ($> 0$), lançando um <code>ValueError</code> antes que qualquer cálculo matemático ocorra.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">Exemplo de Output Esperado:</div>
+        <pre>--- Subject Test Case ---
+[22.507863455018317, 29.0359168241966] &lt;class 'list'&gt;
+[False, True]</pre>
+    </div>
+
+    <!-- ex01 -->
+    <h2>ex01: 2D Array</h2>
+    <ul>
+        <li><strong>Arquivos de entrega:</strong> <code>array2D.py</code></li>
+        <li><strong>Objetivo:</strong> Obter o formato (shape) de um array 2D, realizar um fatiamento (slice) nativo do Python na primeira dimensão (linhas) e retornar o array fatiado com seu novo formato impresso.</li>
+    </ul>
+
+    <div class="q-block">
+        <div class="q-title">P: Qual é a diferença entre o fatiamento de listas nativas do Python e o fatiamento de arrays do NumPy?</div>
+        <div>O fatiamento nativo em uma lista 2D do Python (lista de listas) só funciona para selecionar linhas (a primeira dimensão), pois o Python enxerga como uma lista unidimensional de objetos. Para fatiar colunas de forma eficiente ou sub-matrizes, precisaríamos usar a sintaxe multidimensional do NumPy (ex: <code>arr[start:end, col_start:col_end]</code>).</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">P: Como garantimos que a lista fornecida representa uma matriz 2D válida?</div>
+        <div>Verificamos se cada elemento de <code>family</code> é uma lista e se todas essas sublistas possuem exatamente o mesmo tamanho. Se houver discrepância no tamanho das linhas, lançamos um <code>ValueError</code> para evitar que a conversão para NumPy resulte em um array unidimensional de tipo <code>object</code> com dimensões incorretas.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">P: Como lidamos com a validação de tipos inteiros para os índices de fatiamento?</div>
+        <div>Usamos a checagem explícita <code>type(start) is not int</code> e <code>type(end) is not int</code> para impedir o uso de booleanos (como <code>True</code> ou <code>False</code>), que são subclasses de <code>int</code> em Python e passariam em um teste tradicional com <code>isinstance()</code>.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">Exemplo de Output Esperado:</div>
+        <pre>--- Subject Test Case ---
+My shape is : (4, 2)
+My new shape is : (2, 2)
+[[2.15, 102.7], [2.10, 98.5]]
+My shape is : (4, 2)
+My new shape is : (1, 2)
+[[2.15, 102.7]]</pre>
+    </div>
+
+    <!-- ex02 -->
+    <h2>ex02: Load my image</h2>
+    <ul>
+        <li><strong>Arquivos de entrega:</strong> <code>load_image.py</code></li>
+        <li><strong>Objetivo:</strong> Carregar uma imagem usando Pillow (PIL), convertê-la para RGB explicitamente, transformá-la em um array NumPy, imprimir seu formato (shape) e retornar o array contendo os pixels.</li>
+    </ul>
+
+    <div class="q-block">
+        <div class="q-title">P: Por que é necessário converter a imagem explicitamente para "RGB" com `convert("RGB")`?</div>
+        <div>Imagens podem ter diferentes formatos como RGBA (com canal alfa de transparência), tons de cinza (L) ou paletizadas (P). A conversão explícita para "RGB" garante consistência nos dados de entrada, de forma que o array NumPy resultante sempre possua exatamente 3 canais de cor e o formato <code>(Altura, Largura, 3)</code>.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">P: Como lidamos com erros de arquivos não encontrados ou formatos inválidos/corrompidos sem causar crash no programa?</div>
+        <div>Utilizamos blocos <code>try-except</code> capturando exceções específicas do Python e do Pillow como <code>FileNotFoundError</code> e <code>PIL.UnidentifiedImageError</code>. Capturando essas exceções, exibimos uma mensagem de erro clara e retornamos <code>None</code> em vez de permitir que o erro cause o encerramento abrupto (crash) do script.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">Exemplo de Output Esperado (Verificação):</div>
+        <pre>--- Test 1: Subject Test Case (Valid Image) ---
+The shape of image is: (1024, 768, 3)
+[[[120 110  97]
+  [121 111  98]
+  ...
+  [ 58  38  17]]]
+
+--- Test 2: Non-existent Image File ---
+Error: The file at 'nonexistent.jpg' was not found.
+None
+
+--- Test 3: Invalid Type for Path ---
+Error: Path must be a string.
+None</pre>
+    </div>
+
+    <!-- ex03 -->
+    <h2>ex03: Zoom on me</h2>
+    <ul>
+        <li><strong>Arquivos de entrega:</strong> <code>load_image.py</code>, <code>zoom.py</code></li>
+        <li><strong>Objetivo:</strong> Recortar uma área de 400x400 com 1 canal de cor (escala de cinza) de uma imagem carregada e exibi-la com coordenadas nos eixos X e Y.</li>
+    </ul>
+
+    <div class="q-block">
+        <div class="q-title">P: Como o fatiamento no NumPy `img[100:500, 380:780, 0:1]` funciona para fazer o zoom?</div>
+        <div>Nós fatiamos o array multidimensional especificando os intervalos para cada dimensão: <code>100:500</code> para o eixo Y (altura de 400px), <code>380:780</code> para o eixo X (largura de 400px) e <code>0:1</code> para selecionar apenas o primeiro canal de cor (Red), reduzindo o canal para escala de cinza de canal único. O resultado final possui shape <code>(400, 400, 1)</code>.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">P: Por que o output exibe `(400, 400, 1) or (400, 400)`?</div>
+        <div>A primeira tupla representa as dimensões reais do array fatiado mantendo a dimensão de canal (3D com profundidade 1). Ao aplicar <code>sliced.shape[:2]</code>, omitimos a última dimensão do canal, obtendo <code>(400, 400)</code>, que representa a imagem em formato 2D tradicional.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">Exemplo de Output Esperado:</div>
+        <pre>The shape of image is: (768, 1024, 3)
+[[[120 110  97]
+  [121 111  98]
+  ...]]
+New shape after slicing: (400, 400, 1) or (400, 400)
+[[[167]
+  [180]
+  ...]]</pre>
+    </div>
+
+    <!-- ex04 -->
+    <h2>ex04: Rotate me</h2>
+    <p><em>(Implementação Pendente)</em></p>
+
+    <!-- ex05 -->
+    <h2>ex05: Pimp my image</h2>
+    <p><em>(Implementação Pendente)</em></p>
+
+</body>
+</html>

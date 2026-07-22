@@ -1,12 +1,6 @@
-"""Exercise 03 — Title placeholder.
+"""Test wrapper for Exercise 03 (Zoom on me)."""
 
-Describe the goal of this exercise here.
-"""
-
-
-def main() -> None:
-    """Entry point for exercise 03."""
-    pass
+from zoom import main
 
 
 if __name__ == "__main__":

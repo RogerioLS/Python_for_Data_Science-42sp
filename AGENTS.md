@@ -37,7 +37,7 @@ When reviewing code in this repository:
 ## Commit and PR Reviews
 
 - Check that commit messages follow the format in `CONTRIBUTING.md`.
-- Confirm that every exercise folder contains `main.py`, `README.md`, and `notes.md`.
+- Confirm that every exercise folder contains `main.py`.
 - Flag any unnecessary external dependencies.
 
 ## What to Avoid
