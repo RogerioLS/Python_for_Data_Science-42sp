@@ -214,7 +214,34 @@ New shape after slicing: (400, 400, 1) or (400, 400)
 
     <!-- ex04 -->
     <h2>ex04: Rotate me</h2>
-    <p><em>(Implementação Pendente)</em></p>
+    <ul>
+        <li><strong>Arquivos de entrega:</strong> <code>load_image.py</code>, <code>rotate.py</code></li>
+        <li><strong>Objetivo:</strong> Recortar uma área de 400x400 com 1 canal de cor de uma imagem e transpô-la manualmente (inverter os eixos X e Y) utilizando apenas loops estruturados em Python, sem o uso de bibliotecas prontas para transposição.</li>
+    </ul>
+
+    <div class="q-block">
+        <div class="q-title">P: Como funciona a matemática da transposição de matrizes?</div>
+        <div>A transposição troca as linhas pelas colunas. O elemento localizado na posição <code>(i, j)</code> da matriz original é mapeado para a posição <code>(j, i)</code> na matriz transposta. Matematicamente: $A^T[j, i] = A[i, j]$.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">P: Como garantir que a transposição foi feita de forma estritamente manual?</div>
+        <div>Nós evitamos qualquer atalho como o atributo <code>.T</code>, a função <code>np.transpose()</code>, <code>np.rot90()</code> do NumPy ou funções equivalentes do Pillow/PIL. Em vez disso, alocamos um novo array destino de formato <code>(largura, altura)</code> e executamos loops aninhados para iterar por cada linha e coluna fazendo a cópia manual de cada pixel.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">Exemplo de Output Esperado (Verificação):</div>
+        <pre>The shape of image is: (768, 1024, 3)
+The shape of image is: (400, 400, 1) or (400, 400)
+[[[167]
+  [180]
+  ...]]
+New shape after Transpose: (400, 400)
+[[167 180 ... 101]
+ [167 180 ... 101]
+ ...
+ [101 101 ... 101]]</pre>
+    </div>
 
     <!-- ex05 -->
     <h2>ex05: Pimp my image</h2>

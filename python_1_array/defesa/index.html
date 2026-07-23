@@ -675,20 +675,74 @@ New shape after slicing: (400, 400, 1) or (400, 400)
                 </div>
             </section>
 
-            <!-- Placeholder Exercise 04 -->
+            <!-- Exercise 04 -->
             <section id="ex04" class="section-card">
                 <div class="section-header">
                     <div class="section-title">
                         <h2>ex04: <span>Rotate me</span></h2>
                         <p>Files to turn in: <code>load_image.py, rotate.py</code></p>
                     </div>
-                    <span class="badge" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: var(--warning-color);">PENDING</span>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
                 </div>
-                <div class="pending-card">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                    </svg>
-                    <p>Pending implementation. Content will be added here once ex04 is completed.</p>
+
+                <div class="grid">
+                    <!-- Left: Objective & Code -->
+                    <div class="info-block">
+                        <h4>Objective & Solution Summary</h4>
+                        <p>Crop a 400x400 area from the loaded image with 1 color channel (grayscale) and transpose it manually without using any helper libraries for rotation/transposition.</p>
+                        <br>
+                        <p>Implemented manual transposition by instantiating a new NumPy array of swapped dimensions and populating it using nested <code>for</code> loops.</p>
+                        <pre><code><span class="cmd"># Manual transposition loop</span>
+for i in range(height):
+    for j in range(width):
+        transposed[j, i] = sliced[i, j, 0]</code></pre>
+                    </div>
+
+                    <!-- Right: Critical Validation -->
+                    <div class="info-block accent">
+                        <h4>Critical Validation Checks</h4>
+                        <ul>
+                        <li><strong>Manual Transposition:</strong> Verified that no NumPy transposition shortcuts like <code>.T</code>, <code>np.transpose()</code>, or <code>np.rot90()</code> are used.</li>
+                        <li><strong>Grayscale Color Channel:</strong> Isolated single channel <code>0`</code> (Red channel) and printed shapes.</li>
+                        <li><strong>Axis Scales:</strong> Matplotlib window displays coordinates for both X and Y dimensions (0 to 400).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Full Width: Defense Explanations -->
+                    <div class="info-block full-width">
+                        <h4>How to Defend (Why & Q&A)</h4>
+                        
+                        <div class="defense-tip">
+                            <p><span>Q: What is the math behind a matrix transpose?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                                "Transposing swaps the rows and columns of a matrix. The element at index `(i, j)` in the original matrix becomes the element at index `(j, i)` in the transposed matrix. Mathematically: $T[j, i] = A[i, j]$."
+                            </p>
+                        </div>
+
+                        <div class="defense-tip" style="border-left-color: var(--neon-blue); background: rgba(0, 242, 254, 0.05);">
+                            <p><span>Q: How did you implement this transpose manually?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
+                                "We initialize a destination array of shape `(width, height)`. We then use nested loops to iterate through all rows `i` and columns `j` of the sliced image, assigning `transposed[j, i] = sliced[i, j, 0]`."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Full Width: Verification Commands & Output -->
+                    <div class="info-block full-width">
+                        <h4>Verification Commands & Output</h4>
+                        <pre><code><span class="cmd">python main.py</span>
+
+The shape of image is: (768, 1024, 3)
+The shape of image is: (400, 400, 1) or (400, 400)
+[[[167]
+  [180]
+  ...]]
+New shape after Transpose: (400, 400)
+[[167 180 ... 101]
+ [167 180 ... 101]
+ ...
+ [101 101 ... 101]]</code></pre>
+                    </div>
                 </div>
             </section>
 

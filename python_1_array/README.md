@@ -247,7 +247,31 @@ Transposes an image (x and y swap) manually without using high-level libraries f
 <details>
 <summary><b>📘 Exercise 04 – Learning Notes</b></summary>
 
-*(Pending implementation)*
+### 1. Objective
+Slice a 400x400 region with one color channel (Red channel, index `0`) from an image and transpose it manually. Display the transposed image showing coordinate scales on both the X and Y axes.
+
+### 2. Requirements & Constraints
+- Load `animal.jpeg` using `ft_load` from `load_image.py`.
+- Crop a 400x400 slice (e.g., `[100:500, 380:780, 0:1]`).
+- Print the sliced array shape and content.
+- Transpose the 400x400 slice manually using **nested loops** in Python, swapping the X and Y axes (e.g. `transposed[j, i] = sliced[i, j, 0]`).
+- Do **NOT** use `np.transpose`, `np.rot90`, `T`, or PIL's transpose/rotate functions.
+- Print the transposed shape and content.
+- Display the transposed grayscale image with axes/ticks enabled using `matplotlib.pyplot`.
+
+### 3. Manual Transposition Logic
+In linear algebra, transposing a matrix $A$ results in a new matrix $A^T$ where elements are swapped along the main diagonal:
+$$A^T[j][i] = A[i][j]$$
+
+By iterating through the height and width of the sliced image array using nested loops, we copy each pixel to its swapped coordinate position in the target array:
+```python
+# Height and width are both 400
+transposed = np.zeros((width, height), dtype=sliced.dtype)
+for i in range(height):
+    for j in range(width):
+        transposed[j, i] = sliced[i, j, 0]
+```
+This converts the shape from `(400, 400, 1)` to `(400, 400)` and rotates/transposes the image counter-clockwise or clockwise with vertical flip.
 
 </details>
 

@@ -1,12 +1,6 @@
-"""Exercise 04 — Title placeholder.
+"""Test runner for Exercise 04 (Rotate me)."""
 
-Describe the goal of this exercise here.
-"""
-
-
-def main() -> None:
-    """Entry point for exercise 04."""
-    pass
+from rotate import main
 
 
 if __name__ == "__main__":
