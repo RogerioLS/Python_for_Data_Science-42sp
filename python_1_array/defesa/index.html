@@ -753,13 +753,42 @@ New shape after Transpose: (400, 400)
                         <h2>ex05: <span>Pimp my image</span></h2>
                         <p>Files to turn in: <code>load_image.py, pimp_image.py</code></p>
                     </div>
-                    <span class="badge" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: var(--warning-color);">PENDING</span>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
                 </div>
-                <div class="pending-card">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                    </svg>
-                    <p>Pending implementation. Content will be added here once ex05 is completed.</p>
+                <div class="grid">
+                    <div class="info-block">
+                        <h4>Exercise Goal & Core Concepts</h4>
+                        <p>
+                            Implement custom image filters by manipulating NumPy array channels while obeying strict mathematical operator constraints:
+                        </p>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">
+                            <li><strong>ft_invert:</strong> Inverts color levels using <code>=, +, -, *</code> (e.g. <code>255 - array</code>).</li>
+                            <li><strong>ft_red:</strong> Keeps only red channel using <code>=, *</code> (e.g. green and blue channels multiplied by 0).</li>
+                            <li><strong>ft_green:</strong> Keeps only green channel using <code>=, -</code> (e.g. subtracting channels from themselves).</li>
+                            <li><strong>ft_blue:</strong> Keeps only blue channel using <code>=</code> (e.g. directly setting other channels to 0).</li>
+                            <li><strong>ft_grey:</strong> Converts to grayscale using <code>=, /</code> (e.g. summing channels and dividing by 3).</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-block accent">
+                        <h4>Q&A for Defense</h4>
+                        <p><strong>Q: How do you clear a channel with only the subtraction operator?</strong></p>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;">A: Subtracting the channel array from itself: <code>arr[:,:,c] - arr[:,:,c]</code> evaluates to zero element-wise.</p>
+                        <p><strong>Q: Why do you need <code>np.sum</code> or division for grayscale?</strong></p>
+                        <p style="color: var(--text-secondary);">A: Grayscale represents the average of the RGB channels. Summing across axis 2 (the color dimension) and dividing by 3 calculates the mean color value, which is then copied across all three channels.</p>
+                    </div>
+
+                    <div class="info-block full-width">
+                        <h4>Implementation & Constraints Log</h4>
+                        <pre style="background: rgba(0, 0, 0, 0.4); padding: 1rem; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--neon-blue); overflow-x: auto;">
+[LOG] ft_invert: Applied 255 - array (used: =, -)
+[LOG] ft_red: Applied channel_G * 0, channel_B * 0 (used: =, *)
+[LOG] ft_green: Applied channel_R - channel_R, channel_B - channel_B (used: =, -)
+[LOG] ft_blue: Applied channel_R = 0, channel_G = 0 (used: =)
+[LOG] ft_grey: Applied np.sum(array, axis=2) / 3 (used: =, /)
+[LOG] All transformations displayed with coordinate scales on both axes using matplotlib.pyplot.
+                        </pre>
+                    </div>
                 </div>
             </section>
         </main>

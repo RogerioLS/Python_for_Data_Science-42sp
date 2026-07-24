@@ -245,7 +245,37 @@ New shape after Transpose: (400, 400)
 
     <!-- ex05 -->
     <h2>ex05: Pimp my image</h2>
-    <p><em>(Implementação Pendente)</em></p>
+    <ul>
+        <li><strong>Arquivos de entrega:</strong> <code>load_image.py</code>, <code>pimp_image.py</code></li>
+        <li><strong>Objetivo:</strong> Implementar 5 filtros de imagem customizados manipulando arrays NumPy sob restrições estritas de operadores matemáticos, exibindo e retornando as imagens transformadas com o mesmo formato.</li>
+    </ul>
+
+    <div class="q-block">
+        <div class="q-title">P: Quais são as restrições de operadores para cada filtro e como elas foram implementadas?</div>
+        <div>
+            <ul>
+                <li><strong>Invert (espera-se =, +, -, *):</strong> Usado <code>255 - array</code>. Inverte as intensidades de todos os canais.</li>
+                <li><strong>Red (espera-se =, *):</strong> Usado <code>arr[:,:,1] * 0</code> e <code>arr[:,:,2] * 0</code> para anular os canais Verde (G) e Azul (B).</li>
+                <li><strong>Green (espera-se =, -):</strong> Usado <code>arr[:,:,0] - arr[:,:,0]</code> e <code>arr[:,:,2] - arr[:,:,2]</code> para zerar Vermelho (R) e Azul (B) por subtração.</li>
+                <li><strong>Blue (espera-se =):</strong> Usado atribuição direta <code>arr[:,:,0] = 0</code> e <code>arr[:,:,1] = 0</code> para anular Vermelho e Verde.</li>
+                <li><strong>Grey (espera-se =, /):</strong> Usado <code>np.sum(array, axis=2) / 3</code> para calcular a média e atribuído de volta para todos os três canais.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">P: Como a escala de cinza preserva o formato (shape) da imagem original?</div>
+        <div>A média dos canais calculada via <code>np.sum(array, axis=2) / 3</code> gera um array 2D. Para manter o formato original 3D (H, W, 3), o valor médio calculado é atribuído de volta a cada um dos três canais da imagem (R, G e B) individualmente usando a atribuição <code>=</code>, mantendo a imagem compatível para visualização RGB.</div>
+    </div>
+
+    <div class="q-block">
+        <div class="q-title">Exemplo de Output Esperado (Verificação):</div>
+        <pre>The shape of image is: (257, 450, 3)
+[[[19 42 83]
+  [23 42 84]
+  ...]]
+Inverts the color of the image received.</pre>
+    </div>
 
 </body>
 </html>

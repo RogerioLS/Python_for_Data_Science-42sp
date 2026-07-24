@@ -282,8 +282,56 @@ This converts the shape from `(400, 400, 1)` to `(400, 400)` and rotates/transpo
 Applies custom filters to an image using specific math operators.
 
 <details>
-<summary><b>📘 Exercise 05 – Learning Notes</b></summary>
+### Objective & Requirements
+- Implement `pimp_image.py` with 5 image filter functions: `ft_invert`, `ft_red`, `ft_green`, `ft_blue`, and `ft_grey`.
+- The functions must apply filters while maintaining the original shape.
+- Use only specified/constrained operators for each filter:
+  - **Invert**: `=`, `+`, `-`, `*` (e.g. `255 - array`)
+  - **Red**: `=`, `*` (e.g. `array * [1, 0, 0]`)
+  - **Green**: `=`, `-` (e.g. subtracting channels from themselves)
+  - **Blue**: `=` (e.g. assigning zero directly to other channels)
+  - **Grey**: `=`, `/` (e.g. summing channels and dividing by 3)
+- Display each image using `matplotlib.pyplot` showing scales on both axes.
 
-*(Pending implementation)*
+### Math Behind the Constrained Operators
+
+1. **Inversion** (Allowed: `=`, `+`, `-`, `*`):
+   Color inversion subtracts the current intensity from the maximum value (255 for 8-bit images):
+   $$I_{\text{inverted}}(x, y, c) = 255 - I(x, y, c)$$
+   Using subtraction (`-`), we invert the color levels.
+
+2. **Red Filter** (Allowed: `=`, `*`):
+   To keep only the red channel, we multiply the green and blue channels by 0:
+   $$I_{\text{red}}(x, y, c) = I(x, y, c) \times [1, 0, 0]_c$$
+   In NumPy, this can be achieved by multiplying the channel slices directly:
+   ```python
+   red_img[:, :, 1] = red_img[:, :, 1] * 0  # Clears green
+   red_img[:, :, 2] = red_img[:, :, 2] * 0  # Clears blue
+   ```
+
+3. **Green Filter** (Allowed: `=`, `-`):
+   To keep only the green channel without using multiplication, we subtract the channels from themselves to clear them to 0:
+   $$I_{\text{green}}(x, y, c) = I(x, y, c) - I(x, y, c) \quad \text{for } c \in \{0, 2\}$$
+   In NumPy:
+   ```python
+   green_img[:, :, 0] = green_img[:, :, 0] - green_img[:, :, 0]  # Clears red
+   green_img[:, :, 2] = green_img[:, :, 2] - green_img[:, :, 2]  # Clears blue
+   ```
+
+4. **Blue Filter** (Allowed: `=`):
+   We directly assign zero to the red and green channels using the assignment operator:
+   ```python
+   blue_img[:, :, 0] = 0  # Clears red
+   blue_img[:, :, 1] = 0  # Clears green
+   ```
+
+5. **Grey Filter** (Allowed: `=`, `/`):
+   Grayscale can be computed as the average of the RGB channels:
+   $$I_{\text{grey}}(x, y) = \frac{R + G + B}{3}$$
+   Since `+` is not allowed, we use a built-in summation function like `np.sum(array, axis=2)` and then divide using `/`:
+   ```python
+   grey_val = np.sum(array, axis=2) / 3
+   ```
+   The average value is then assigned to all three channels to maintain the original shape.
 
 </details>
