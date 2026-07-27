@@ -248,6 +248,7 @@ Transposes an image (x and y swap) manually without using high-level libraries f
 <summary><b>📘 Exercise 04 – Learning Notes</b></summary>
 
 ### 1. Objective
+
 Slice a 400x400 region with one color channel (Red channel, index `0`) from an image and transpose it manually. Display the transposed image showing coordinate scales on both the X and Y axes.
 
 ### 2. Requirements & Constraints
