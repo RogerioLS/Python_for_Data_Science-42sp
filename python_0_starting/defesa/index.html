@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>42 Python Piscine - Module 00 Defense Guide</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --accent-gradient: linear-gradient(135deg, #f02fc2 0%, #6094ea 100%);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --neon-blue: #00f2fe;
+            --neon-pink: #f02fc2;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(240, 47, 194, 0.05) 0%, transparent 40%);
+        }
+
+        header {
+            padding: 2rem 5%;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            background: rgba(11, 15, 25, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .header-title p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .badge {
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--neon-blue);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+            gap: 2rem;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .nav-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .nav-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            padding-left: 0.5rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item a:hover {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+            padding-left: 1rem;
+        }
+
+        .nav-item.active a {
+            background: rgba(0, 242, 254, 0.08);
+            color: #ffffff;
+            border-left-color: var(--neon-blue);
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title h2 span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.4rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 968px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .full-width {
+                grid-column: span 2;
+            }
+        }
+
+        .info-block {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .info-block h4 {
+            font-size: 1.05rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-block h4::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background: var(--neon-blue);
+            border-radius: 2px;
+        }
+
+        .info-block.accent h4::before {
+            background: var(--neon-pink);
+        }
+
+        .info-block p, .info-block li {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .info-block ul {
+            list-style-position: inside;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        /* Highlights & Alerts */
+        .defense-tip {
+            border-left: 4px solid var(--neon-pink);
+            background: rgba(240, 47, 194, 0.05);
+            padding: 1.25rem;
+            border-radius: 0 12px 12px 0;
+            margin-top: 1rem;
+        }
+
+        .defense-tip p {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .defense-tip span {
+            color: var(--neon-pink);
+            font-weight: 700;
+        }
+
+        /* Code Block Styling */
+        pre {
+            background: #05070c;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-top: 0.8rem;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #e5e7eb;
+        }
+
+        .cmd {
+            color: var(--neon-blue);
+        }
+
+        .output-tag {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-title">
+            <h1>42 Python Piscine - Module 00 Defense Guide</h1>
+            <p>Peer-to-Peer Defense Study Guide & Knowledge Sheet (Starting)</p>
+        </div>
+        <span class="badge">MODULE 00: STARTING</span>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside>
+            <nav class="nav-card">
+                <h3>Exercises</h3>
+                <ul class="nav-list">
+                    <li class="nav-item active"><a href="#ex00">ex00: First Python Script</a></li>
+                    <li class="nav-item"><a href="#ex01">ex01: First Use of Package</a></li>
+                    <li class="nav-item"><a href="#ex02">ex02: First Function Python</a></li>
+                    <li class="nav-item"><a href="#ex03">ex03: NULL Not Found</a></li>
+                    <li class="nav-item"><a href="#ex04">ex04: Even or Odd</a></li>
+                    <li class="nav-item"><a href="#ex05">ex05: Building</a></li>
+                    <li class="nav-item"><a href="#ex06">ex06: Filterstring</a></li>
+                    <li class="nav-item"><a href="#ex07">ex07: S.O.S</a></li>
+                    <li class="nav-item"><a href="#ex08">ex08: Loading</a></li>
+                    <li class="nav-item"><a href="#ex09">ex09: Package Creation</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <!-- ex00 -->
+            <section id="ex00" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex00: <span>First Python Script</span></h2>
+                        <p>File: <code>Hello.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+                <div class="grid">
+                    <div class="info-block">
+                        <h4>Data Structures & Mutability</h4>
+                        <p>Modify elements inside standard Python data structures: List, Tuple, Set, and Dict.</p>
+                        <ul>
+                            <li><strong>List:</strong> Mutable, ordered. Modified via index (<code>ft_list[1] = "World!"</code>).</li>
+                            <li><strong>Tuple:</strong> Immutable. Cannot be modified in place; reassigned as a new tuple.</li>
+                            <li><strong>Set:</strong> Unordered, unique items. Modified with <code>.remove()</code> and <code>.add()</code>.</li>
+                            <li><strong>Dict:</strong> Key-value pairs. Modified via key access (<code>ft_dict["Hello"] = "42..."</code>).</li>
+                        </ul>
+                    </div>
+                    <div class="info-block accent">
+                        <h4>Q&A for Defense</h4>
+                        <div class="defense-tip">
+                            <p><span>Q: Why can't we modify a Tuple in place?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">"Tuples are immutable collections. Once instantiated, their memory footprint and pointers cannot change. This makes them hashable."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ex01 -->
+            <section id="ex01" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex01: <span>First Use of Package</span></h2>
+                        <p>File: <code>format_ft_time.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+                <div class="grid">
+                    <div class="info-block">
+                        <h4>Timestamps & String Formatting</h4>
+                        <p>Retrieve Unix Epoch time using <code>time.time()</code> and format large numbers into human-readable and scientific notations.</p>
+                        <pre><code># Formatting with commas & scientific notation
+f"{timestamp:,.4f}"  # 1,713,648,000.1234
+f"{timestamp:.2e}"   # 1.71e+09
+time.strftime("%b %d %Y", time.localtime()) # Oct 21 2022</code></pre>
+                    </div>
+                    <div class="info-block accent">
+                        <h4>Q&A for Defense</h4>
+                        <div class="defense-tip">
+                            <p><span>Q: What is Unix Epoch time?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">"It represents the total number of seconds elapsed since January 1, 1970 (00:00:00 UTC)."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ex02 -->
+            <section id="ex02" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex02: <span>First Function Python</span></h2>
+                        <p>File: <code>find_ft_type.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+                <div class="grid">
+                    <div class="info-block">
+                        <h4>Dynamic Typing & `type()`</h4>
+                        <p>Identify the data type of an arbitrary object using <code>type(obj)</code>, print custom messages depending on type, and return 42.</p>
+                    </div>
+                    <div class="info-block accent">
+                        <h4>Q&A for Defense</h4>
+                        <div class="defense-tip">
+                            <p><span>Q: What is the difference between `type(x) == t` and `isinstance(x, t)`?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">"`type()` checks for an exact class match, while `isinstance()` checks if the object is an instance of the class or any of its subclasses."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ex03 -->
+            <section id="ex03" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex03: <span>NULL Not Found</span></h2>
+                        <p>File: <code>NULL_not_found.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+                <div class="grid">
+                    <div class="info-block">
+                        <h4>Falsy & Null-like Values</h4>
+                        <p>Distinguish between different representations of "null" in Python: <code>None</code>, <code>NaN</code>, <code>0</code>, <code>""</code>, and <code>False</code>.</p>
+                        <ul>
+                            <li><strong>None:</strong> Checked via <code>obj is None</code>.</li>
+                            <li><strong>NaN:</strong> IEEE 754 float where <code>nan != nan</code>. Checked via <code>math.isnan(obj)</code>.</li>
+                            <li><strong>False vs 0:</strong> Checked by validating <code>type(obj) is bool</code> versus <code>type(obj) is int</code>.</li>
+                        </ul>
+                    </div>
+                    <div class="info-block accent">
+                        <h4>Q&A for Defense</h4>
+                        <div class="defense-tip">
+                            <p><span>Q: Why does `float("nan") == float("nan")` return False?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">"Per the IEEE 754 floating-point standard, NaN (Not a Number) is defined to not be equal to any value, including itself. `math.isnan()` must be used."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ex04 -->
+            <section id="ex04" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex04: <span>Even or Odd</span></h2>
+                        <p>File: <code>whatis.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+                <div class="grid">
+                    <div class="info-block">
+                        <h4>CLI Arguments & Assertions</h4>
+                        <p>CLI program that validates command-line arguments in <code>sys.argv</code> and uses <code>AssertionError</code> for error handling.</p>
+                        <pre><code>if len(sys.argv) < 2:
+    exit()
+assert len(sys.argv) == 2, "more than one argument is provided"
+try:
+    num = int(sys.argv[1])
+except ValueError:
+    raise AssertionError("argument is not an integer")</code></pre>
+                    </div>
+                    <div class="info-block accent">
+                        <h4>Q&A for Defense</h4>
+                        <div class="defense-tip">
+                            <p><span>Q: Why use AssertionError instead of standard print?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">"The exercise specifically required input validation failures to be signaled via `AssertionError` messages."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ex05 -->
+            <section id="ex05" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex05: <span>Building</span></h2>
+                        <p>File: <code>building.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+                <div class="grid">
+                    <div class="info-block">
+                        <h4>String Analysis & Stdin Input</h4>
+                        <p>Counts total characters, uppercase, lowercase, punctuation, spaces, and digits. Reads from <code>sys.argv</code> or prompts via <code>sys.stdin</code> if no argument is passed.</p>
+                    </div>
+                    <div class="info-block accent">
+                        <h4>Q&A for Defense</h4>
+                        <div class="defense-tip">
+                            <p><span>Q: How do you handle string analysis efficiently?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">"Using Python string methods: `.isupper()`, `.islower()`, `.isdigit()`, `.isspace()`, and `string.punctuation`."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ex06 -->
+            <section id="ex06" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex06: <span>Filterstring</span></h2>
+                        <p>Files: <code>ft_filter.py, filterstring.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+                <div class="grid">
+                    <div class="info-block">
+                        <h4>List Comprehensions & Custom Filter</h4>
+                        <p>Re-implement built-in <code>filter()</code> using list comprehensions or generators in <code>ft_filter.py</code>, then use it to filter words in a string based on length.</p>
+                    </div>
+                    <div class="info-block accent">
+                        <h4>Q&A for Defense</h4>
+                        <div class="defense-tip">
+                            <p><span>Q: How does `ft_filter` mimic `filter()`?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">"By returning an iterator/generator or list: `(item for item in iterable if function(item))`."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ex07 -->
+            <section id="ex07" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex07: <span>S.O.S</span></h2>
+                        <p>File: <code>sos.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+                <div class="grid">
+                    <div class="info-block">
+                        <h4>Dictionary Lookup & Encoding</h4>
+                        <p>Encodes a string into Morse code using a pre-defined dictionary mapping. Raises <code>AssertionError</code> if invalid characters are encountered.</p>
+                    </div>
+                    <div class="info-block accent">
+                        <h4>Q&A for Defense</h4>
+                        <div class="defense-tip">
+                            <p><span>Q: Why use a dictionary for Morse code?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">"Dictionary key lookups run in O(1) time complexity on average because of internal hash table implementation."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ex08 -->
+            <section id="ex08" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex08: <span>Loading</span></h2>
+                        <p>File: <code>Loading.py</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+                <div class="grid">
+                    <div class="info-block">
+                        <h4>Generators (`yield`) & Carriage Return (`\r`)</h4>
+                        <p>Custom progress bar generator <code>ft_tqdm</code> using <code>yield</code> and in-place line overwriting via <code>\r</code> and <code>sys.stdout.write()</code>.</p>
+                    </div>
+                    <div class="info-block accent">
+                        <h4>Q&A for Defense</h4>
+                        <div class="defense-tip">
+                            <p><span>Q: How does `\r` update the progress bar without printing new lines?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">"`\r` moves the cursor to the beginning of the current terminal line, overwriting previous progress output."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ex09 -->
+            <section id="ex09" class="section-card">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>ex09: <span>Package Creation</span></h2>
+                        <p>Package: <code>ft_package</code></p>
+                    </div>
+                    <span class="badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: var(--success-color);">COMPLETE</span>
+                </div>
+                <div class="grid">
+                    <div class="info-block">
+                        <h4>Packaging & PyPI Distribution Setup</h4>
+                        <p>Create a redistributable Python package <code>ft_package</code> configured via <code>pyproject.toml</code>, built using <code>build</code>, and installable via <code>pip</code>.</p>
+                    </div>
+                    <div class="info-block accent">
+                        <h4>Q&A for Defense</h4>
+                        <div class="defense-tip">
+                            <p><span>Q: What is `pyproject.toml` used for?</span></p>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">"It is the modern standard (PEP 517/518) for defining build system requirements and package metadata."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2026 42 Piscine Python for Data Science. Module 00 Defense Support.</p>
+    </footer>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.querySelector('a').getAttribute('href').slice(1) === current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

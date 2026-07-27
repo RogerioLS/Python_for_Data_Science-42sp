@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>42 Python Piscine - Módulo 00 Colinha de Defesa (Versão para Impressão)</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #000;
+            background: #fff;
+            line-height: 1.5;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 24px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        strong {
+            font-weight: 700;
+        }
+        code, pre {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 13px;
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        pre {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid #ddd;
+        }
+        .q-block {
+            margin-bottom: 12px;
+            padding-left: 10px;
+            border-left: 3px solid #000;
+        }
+        .q-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        @media print {
+            body {
+                padding: 0;
+                font-size: 12px;
+            }
+            .no-print {
+                display: none;
+            }
+            h2 {
+                page-break-before: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>42 Python Piscine - Módulo 00 Colinha de Estudo para Defesa</h1>
+    <p class="no-print" style="color: #666; font-style: italic; text-align: center; margin-bottom: 30px;">
+        Esta página está otimizada para impressão. Pressione <strong>Ctrl + P</strong> (ou Cmd + P) para imprimir ou salvar como PDF.
+    </p>
+
+    <!-- ex00 -->
+    <h2>ex00: First Python Script (Hello.py)</h2>
+    <ul>
+        <li><strong>Listas:</strong> Mutáveis e ordenadas. Acesso por índice (<code>ft_list[1] = "World!"</code>).</li>
+        <li><strong>Tuplas:</strong> Imutáveis e ordenadas. Reatribuídas como nova tupla (<code>ft_tuple = ("Hello", "Brazil!")</code>).</li>
+        <li><strong>Sets:</strong> Não ordenados, elementos únicos baseados em Hash Table. Usam <code>.add()</code> e <code>.remove()</code>.</li>
+        <li><strong>Dicionários:</strong> Chave-Valor. Mantêm ordem de inserção desde Python 3.7. Acesso por chave (<code>ft_dict["Hello"] = "42..."</code>).</li>
+    </ul>
+
+    <!-- ex01 -->
+    <h2>ex01: First Use of Package (format_ft_time.py)</h2>
+    <div class="q-block">
+        <div class="q-title">P: O que representa o Timestamp Unix?</div>
+        <div>O número total de segundos decorridos desde 1º de janeiro de 1970 (00:00:00 UTC), conhecido como Epoch Unix.</div>
+    </div>
+    <div class="q-block">
+        <div class="q-title">P: Como é feita a formatação em notação científica no Python?</div>
+        <div>Usando o especificador de formato <code>:.2e</code> dentro de f-strings (ex: <code>f"{timestamp:.2e}"</code> gera <code>1.71e+09</code>).</div>
+    </div>
+
+    <!-- ex02 -->
+    <h2>ex02: First Function Python (find_ft_type.py)</h2>
+    <div class="q-block">
+        <div class="q-title">P: Qual a diferença entre `type()` e `isinstance()`?</div>
+        <div><code>type()</code> verifica a correspondência exata de classe da instância. <code>isinstance()</code> verifica se o objeto pertence àquela classe ou a qualquer subclasse descendente.</div>
+    </div>
+
+    <!-- ex03 -->
+    <h2>ex03: NULL Not Found (NULL_not_found.py)</h2>
+    <div class="q-block">
+        <div class="q-title">P: Por que `float("nan") == float("nan")` retorna False?</div>
+        <div>Conforme o padrão IEEE 754 de ponto flutuante, NaN (Not a Number) é definido para não ser igual a nenhum valor, inclusive a si mesmo. A detecção correta exige a função <code>math.isnan()</code>.</div>
+    </div>
+    <div class="q-block">
+        <div class="q-title">P: Como diferenciar `False` de `0`?</div>
+        <div>Em Python, <code>False == 0</code> avalia como True porque <code>bool</code> herda de <code>int</code>. Devemos validar o tipo com <code>type(obj) is bool</code> versus <code>type(obj) is int</code>.</div>
+    </div>
+
+    <!-- ex04 -->
+    <h2>ex04: Even or Odd (whatis.py)</h2>
+    <div class="q-block">
+        <div class="q-title">P: Como os argumentos de linha de comando foram validados?</div>
+        <div>Utilizando <code>sys.argv</code>. Checa-se a quantidade de argumentos recebidos e a conversão de tipo. Erros de validação devem obrigatoriamente disparar <code>AssertionError</code>.</div>
+    </div>
+
+    <!-- ex05 -->
+    <h2>ex05: Building (building.py)</h2>
+    <div class="q-block">
+        <div class="q-title">P: Como o programa lê dados quando nenhum argumento de linha de comando é informado?</div>
+        <div>Ele faz o fallback para a leitura de entrada padrão utilizando <code>sys.stdin.readline()</code>.</div>
+    </div>
+
+    <!-- ex06 -->
+    <h2>ex06: Filterstring (filterstring.py / ft_filter.py)</h2>
+    <div class="q-block">
+        <div class="q-title">P: Como `ft_filter.py` recria a função nativa `filter()`?</div>
+        <div>Usando List Comprehensions ou Geradores: <code>(item for item in iterable if function(item))</code>.</div>
+    </div>
+
+    <!-- ex07 -->
+    <h2>ex07: S.O.S (sos.py)</h2>
+    <div class="q-block">
+        <div class="q-title">P: Por que usar dicionários para tradução de Código Morse?</div>
+        <div>Buscas por chave em dicionários têm complexidade média de tempo O(1) devido à implementação interna com Hash Table.</div>
+    </div>
+
+    <!-- ex08 -->
+    <h2>ex08: Loading (Loading.py)</h2>
+    <div class="q-block">
+        <div class="q-title">P: Como o caractere `\r` permite atualizar a barra de progresso no terminal?</div>
+        <div>O caractere de retorno de carro <code>\r</code> move o cursor para o início da linha atual no terminal, permitindo sobrescrever o texto da barra de progresso dinamicamente.</div>
+    </div>
+
+    <!-- ex09 -->
+    <h2>ex09: Package Creation (ft_package)</h2>
+    <div class="q-block">
+        <div class="q-title">P: Qual a função do `pyproject.toml` na criação de um pacote Python?</div>
+        <div>É a especificação moderna (PEP 517/518) para declarar os requisitos do sistema de build e metadados da biblioteca para distribuição no PyPI/pip.</div>
+    </div>
+
+</body>
+</html>
