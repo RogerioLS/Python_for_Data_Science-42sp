@@ -1,5 +1,12 @@
 def all_thing_is_obj(obj: any) -> int:
+    """Prints the type of the given object and returns 42.
 
+    Args:
+        obj (any): Input object to analyze.
+
+    Returns:
+        int: Always returns 42.
+    """
     obj_type = type(obj)
 
     if obj_type == list:
