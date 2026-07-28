@@ -2,8 +2,13 @@
 
 import sys
 import unittest
-import numpy as np
+from unittest.mock import patch
 from pathlib import Path
+import numpy as np
+
+# Configure matplotlib for headless / non-gui environments (CI/CD safe)
+import matplotlib
+matplotlib.use("Agg")
 
 # Add python_1_array subdirectories to sys.path
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,16 +44,12 @@ class TestModule01(unittest.TestCase):
 
     def test_ex00_give_bmi_errors(self) -> None:
         """Tests error handling for give_bmi."""
-        # Mismatched list sizes
         with self.assertRaises(ValueError):
             give_bmi([1.80, 1.75], [80.0])
-        # Non-numeric items (strings)
         with self.assertRaises(TypeError):
             give_bmi([1.80, "1.75"], [80.0, 70.0])
-        # Booleans (type strictness)
         with self.assertRaises(TypeError):
             give_bmi([True, 1.75], [80.0, 70.0])
-        # Non-positive height
         with self.assertRaises(ValueError):
             give_bmi([0.0, 1.75], [80.0, 70.0])
 
@@ -63,13 +64,10 @@ class TestModule01(unittest.TestCase):
 
     def test_ex01_slice_me_errors(self) -> None:
         """Tests error handling for slice_me."""
-        # Non-list input
         with self.assertRaises(TypeError):
             slice_me("not a list", 0, 2)
-        # Non-integer indices (boolean or string)
         with self.assertRaises(TypeError):
             slice_me([[1, 2]], True, 2)
-        # Inconsistent row sizes
         with self.assertRaises(ValueError):
             slice_me([[1, 2], [3]], 0, 2)
 
@@ -80,7 +78,7 @@ class TestModule01(unittest.TestCase):
         img_arr = ft_load(img_path)
         self.assertIsInstance(img_arr, np.ndarray)
         self.assertEqual(len(img_arr.shape), 3)
-        self.assertEqual(img_arr.shape[2], 3)  # RGB channels
+        self.assertEqual(img_arr.shape[2], 3)
 
     def test_ex02_ft_load_invalid(self) -> None:
         """Tests error handling for ft_load with invalid path."""
@@ -88,8 +86,10 @@ class TestModule01(unittest.TestCase):
         self.assertIsNone(res)
 
     # --- ex05 Tests ---
-    def test_ex05_pimp_image_filters(self) -> None:
-        """Tests image filter outputs and shapes."""
+    @patch("matplotlib.pyplot.show")
+    def test_ex05_pimp_image_filters(self, mock_show) -> None:
+        """Tests image filter outputs by validating matrix array operations (CI/CD headless safe)."""
+        print("\n  [INFO] Validating image transformation via matrix array operations (headless safe)...")
         dummy_img = np.full((10, 10, 3), 100, dtype=np.uint8)
 
         # Invert
@@ -97,21 +97,21 @@ class TestModule01(unittest.TestCase):
         self.assertEqual(inv.shape, (10, 10, 3))
         self.assertEqual(inv[0, 0, 0], 155)
 
-        # Red channel only (G and B cleared)
+        # Red channel only
         red = ft_red(dummy_img)
         self.assertEqual(red.shape, (10, 10, 3))
         self.assertEqual(red[0, 0, 0], 100)
         self.assertEqual(red[0, 0, 1], 0)
         self.assertEqual(red[0, 0, 2], 0)
 
-        # Green channel only (R and B cleared)
+        # Green channel only
         green = ft_green(dummy_img)
         self.assertEqual(green.shape, (10, 10, 3))
         self.assertEqual(green[0, 0, 0], 0)
         self.assertEqual(green[0, 0, 1], 100)
         self.assertEqual(green[0, 0, 2], 0)
 
-        # Blue channel only (R and G cleared)
+        # Blue channel only
         blue = ft_blue(dummy_img)
         self.assertEqual(blue.shape, (10, 10, 3))
         self.assertEqual(blue[0, 0, 0], 0)
