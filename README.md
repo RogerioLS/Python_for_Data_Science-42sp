@@ -1,4 +1,6 @@
-# Python for Data Science — 42 SP
+<div align = center>
+
+# :snake: Python for Data Science | 42 SP
 
 [![Full Piscine Audit](https://github.com/RogerioLS/Python_for_Data_Science-42sp/actions/workflows/audit.yml/badge.svg)](https://github.com/RogerioLS/Python_for_Data_Science-42sp/actions/workflows/audit.yml)
 [![Run All Unit Tests](https://github.com/RogerioLS/Python_for_Data_Science-42sp/actions/workflows/test.yml/badge.svg)](https://github.com/RogerioLS/Python_for_Data_Science-42sp/actions/workflows/test.yml)
@@ -6,7 +8,6 @@
 [![Test Module 00](https://github.com/RogerioLS/Python_for_Data_Science-42sp/actions/workflows/test-m00.yml/badge.svg)](https://github.com/RogerioLS/Python_for_Data_Science-42sp/actions/workflows/test-m00.yml)
 [![Test Module 01](https://github.com/RogerioLS/Python_for_Data_Science-42sp/actions/workflows/test-m01.yml/badge.svg)](https://github.com/RogerioLS/Python_for_Data_Science-42sp/actions/workflows/test-m01.yml)
 [![Syntax Compilation Check](https://github.com/RogerioLS/Python_for_Data_Science-42sp/actions/workflows/compile.yml/badge.svg)](https://github.com/RogerioLS/Python_for_Data_Science-42sp/actions/workflows/compile.yml)
-
 ![Static Badge](https://custom-icon-badges.demolab.com/badge/PYTHON--PISCINE--42-blue?logo=repo)
 ![42 São Paulo](https://custom-icon-badges.demolab.com/badge/42-SP-1E2952)
 ![License](https://custom-icon-badges.demolab.com/github/license/RogerioLS/Python_for_Data_Science-42sp?logo=law&color=dark-green)
@@ -15,6 +16,7 @@
 ![Last commit](https://custom-icon-badges.demolab.com/github/last-commit/RogerioLS/Python_for_Data_Science-42sp?logo=history&color=dark-green)
 ![Repo size](https://custom-icon-badges.demolab.com/github/repo-size/RogerioLS/Python_for_Data_Science-42sp?logo=database)
 ![Languages](https://custom-icon-badges.demolab.com/github/languages/count/RogerioLS/Python_for_Data_Science-42sp?logo=command-palette&color=red)
+</div>
 
 A personal learning repository for the Python for Data Science piscine from École 42 São Paulo.
 
