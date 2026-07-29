@@ -1,0 +1,40 @@
+"module:python_0_starting":
+  - changed-files:
+      - any-glob-to-any-file: "python_0_starting/**"
+
+"module:python_1_array":
+  - changed-files:
+      - any-glob-to-any-file: "python_1_array/**"
+
+"module:python_2_datatable":
+  - changed-files:
+      - any-glob-to-any-file: "python_2_datatable/**"
+
+"module:python_3_oop":
+  - changed-files:
+      - any-glob-to-any-file: "python_3_oop/**"
+
+"module:python_4_dod":
+  - changed-files:
+      - any-glob-to-any-file: "python_4_dod/**"
+
+"type:tests":
+  - changed-files:
+      - any-glob-to-any-file: "tests/**"
+
+"type:docs":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "README.md"
+          - "**/README.md"
+          - "**/defesa/**"
+          - "SECURITY.md"
+
+"type:ci":
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+          - "Makefile"
+          - "scripts/**"
+          - "pyproject.toml"
+          - ".pre-commit-config.yaml"

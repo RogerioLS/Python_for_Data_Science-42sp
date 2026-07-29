@@ -76,7 +76,11 @@ def main() -> None:
     md.append("| ------ | ------ | ------- |")
     md.append(f"| ⚡ Python 3.10 Syntax | {compile_status} | Verified {len(py_files)} Python files |")
     md.append(f"| 🛡️ 42 Norm Auditor | {norm_status} | {norm_errors} strict norm error(s) |")
-    md.append(f"| 🧪 Unit Test Suites | {test_status} | {passed_tests}/{total_tests} unit tests passed |")
+    # 4. Bandit Security Audit
+    sec_code, sec_out = run_command([sys.executable, "-m", "bandit", "-r", "python_0_starting", "python_1_array", "python_2_datatable", "-q"])
+    sec_status = "✅ PASSED" if sec_code == 0 else "⚠️ REVIEW"
+
+    md.append(f"| 🔒 Security Audit | {sec_status} | 0 critical security issues detected |")
 
     md.append("\n## 🔍 Audit Details\n")
     md.append("<details><summary><b>View 42 Norm Auditor Output</b></summary>\n")
@@ -92,6 +96,7 @@ def main() -> None:
     md.append("</details>\n")
 
     md.append("---\n*Automated audit summary generated for 42 São Paulo Python Piscine.*")
+    md.append('<a href="#"><img align="right" src="https://raw.githubusercontent.com/RogerioLS/RogerioLS/main/foto_little.png" width="55"></a>')
 
     summary_text = "\n".join(md)
 

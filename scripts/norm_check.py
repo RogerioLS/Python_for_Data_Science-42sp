@@ -65,13 +65,20 @@ def audit_file(filepath: Path) -> tuple[list[str], list[str]]:
 
 
 def main() -> int:
-    """Runs the audit across python_0_starting and python_1_array."""
+    """Runs the audit across all module directories."""
     root_dir = Path(__file__).resolve().parent.parent
-    target_dirs = [root_dir / "python_0_starting", root_dir / "python_1_array"]
+    target_dirs = [
+        root_dir / "python_0_starting",
+        root_dir / "python_1_array",
+        root_dir / "python_2_datatable",
+        root_dir / "python_3_oop",
+        root_dir / "python_4_dod",
+    ]
 
     total_files = 0
     total_errors = 0
     total_warnings = 0
+    is_ci = os.getenv("GITHUB_ACTIONS") == "true"
 
     print("==================================================")
     print(" 🛡️  42 PYTHON PISCINE NORM & CLEAN CODE AUDITOR  ")
@@ -102,6 +109,8 @@ def main() -> int:
                 print(f"  [FAIL] {rel_path}")
                 for msg in errs:
                     print(f"         └─ ERROR: {msg}")
+                    if is_ci:
+                        print(f"::error file={rel_path},line=1::{msg}")
 
     print("\n--------------------------------------------------")
     print(f"Summary: Audited {total_files} files.")
