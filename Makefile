@@ -19,62 +19,50 @@ WHITE   := \033[97m
 .PHONY: help test test-m00 test-m01 norm compile audit clean
 
 help:
-	@title="42 PYTHON PISCINE — COMMAND CENTER"; \
-	width=78; \
-	len=$$(printf "%s" "$$title" | wc -m); \
-	left=$$(( (width - len) / 2 )); \
-	right=$$(( width - len - left )); \
-	printf "$(CYAN)┌──────────────────────────────────────────────────────────────────────────────┐$(RESET)\n"; \
-	printf "$(CYAN)│$(RESET)%*s$(BOLD)$(MAGENTA)%s$(RESET)%*s$(CYAN)│$(RESET)\n" \
-		$$left "" "$$title" $$right ""; \
-	printf "$(CYAN)├──────────────────────────────────────────────────────────────────────────────┤$(RESET)\n"; \
-	printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)%-15s$(RESET) $(DIM)─$(RESET) %-56s $(CYAN) │$(RESET)\n" \
-		"make help" "Show this interactive help menu"; \
-	printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)%-15s$(RESET) $(DIM)─$(RESET) %-56s $(CYAN) │$(RESET)\n" \
-		"make test" "Run all unit test suites (Module 00 & Module 01)"; \
-	printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)%-15s$(RESET) $(DIM)─$(RESET) %-56s $(CYAN) │$(RESET)\n" \
-		"make test-m00" "Run unit tests for Module 00 (Starting)"; \
-	printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)%-15s$(RESET) $(DIM)─$(RESET) %-56s $(CYAN) │$(RESET)\n" \
-		"make test-m01" "Run unit tests for Module 01 (Array)"; \
-	printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)%-15s$(RESET) $(DIM)─$(RESET) %-56s $(CYAN) │$(RESET)\n" \
-		"make norm" "Run 42 Norm & Clean Code Auditor (docstrings, guards)"; \
-	printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)%-15s$(RESET) $(DIM)─$(RESET) %-56s $(CYAN) │$(RESET)\n" \
-		"make compile" "Compile Python 3.10 syntax across all exercise files"; \
-	printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)%-15s$(RESET) $(DIM)─$(RESET) %-56s $(CYAN) │$(RESET)\n" \
-		"make audit" "Full audit: compile + norm + unit tests"; \
-	printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)%-15s$(RESET) $(DIM)─$(RESET) %-56s $(CYAN) │$(RESET)\n" \
-		"make clean" "Remove temporary cache files (__pycache__, .pyc)"; \
-	printf "$(CYAN)└──────────────────────────────────────────────────────────────────────────────┘$(RESET)\n"
+	@printf "$(CYAN)┌──────────────────────────────────────────────────────────────────────────────┐\n$(RESET)"
+	@printf "$(CYAN)│$(RESET) $(BOLD)$(MAGENTA)                 42 PYTHON PISCINE — COMMAND CENTER                        $(RESET) $(CYAN) │\n$(RESET)"
+	@printf "$(CYAN)├──────────────────────────────────────────────────────────────────────────────┤\n$(RESET)"
+	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make help$(RESET)       $(DIM)─$(RESET) Show this interactive help menu                           $(CYAN)│\n$(RESET)"
+	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make test$(RESET)       $(DIM)─$(RESET) Run all unit test suites (Module 00 & Module 01)          $(CYAN)│\n$(RESET)"
+	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make test-m00$(RESET)   $(DIM)─$(RESET) Run unit tests for Module 00 (Starting)                   $(CYAN)│\n$(RESET)"
+	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make test-m01$(RESET)   $(DIM)─$(RESET) Run unit tests for Module 01 (Array)                      $(CYAN)│\n$(RESET)"
+	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make norm$(RESET)       $(DIM)─$(RESET) Run 42 Norm & Clean Code Auditor (docstrings, guards)     $(CYAN)│\n$(RESET)"
+	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make compile$(RESET)    $(DIM)─$(RESET) Compile Python 3.10 syntax across all exercise files      $(CYAN)│\n$(RESET)"
+	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make audit$(RESET)      $(DIM)─$(RESET) Full audit: compile + norm + unit tests                   $(CYAN)│\n$(RESET)"
+	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make clean$(RESET)      $(DIM)─$(RESET) Remove temporary cache files (__pycache__, .pyc)          $(CYAN)│\n$(RESET)"
+	@printf "$(CYAN)├──────────────────────────────────────────────────────────────────────────────┤\n$(RESET)"
+	@printf "$(CYAN)│$(RESET)           $(BOLD)$(WHITE)🔥 Crafted with • by $(YELLOW)@RogerioLS$(WHITE) $(DIM)•$(RESET) $(BOLD)$(CYAN)42 São Paulo 🇧🇷$(RESET)                  $(CYAN)│\n$(RESET)"
+	@printf "$(CYAN)└──────────────────────────────────────────────────────────────────────────────┘\n$(RESET)"
 
 test:
-	@echo "\n$(BOLD)$(BLUE)🚀 [TESTS] Running all unit test suites...$(RESET)"
+	@printf "$(BOLD)$(BLUE)🚀 [TESTS] Running all unit test suites...$(RESET)\n"
 	@$(PYTHON) -m unittest discover -s tests -p "test_*.py"
 
 test-m00:
-	@echo "\n$(BOLD)$(BLUE)🚀 [TESTS] Running Module 00 (Starting) unit tests...$(RESET)"
+	@printf "$(BOLD)$(BLUE)🚀 [TESTS] Running Module 00 (Starting) unit tests...$(RESET)\n"
 	@$(PYTHON) -m unittest tests/test_module_00.py
 
 test-m01:
-	@echo "\n$(BOLD)$(BLUE)🚀 [TESTS] Running Module 01 (Array) unit tests...$(RESET)"
+	@printf "$(BOLD)$(BLUE)🚀 [TESTS] Running Module 01 (Array) unit tests...$(RESET)\n"
 	@$(PYTHON) -m unittest tests/test_module_01.py
 
 norm:
-	@echo "\n$(BOLD)$(YELLOW)🛡️ [NORM] Running 42 Norm & Clean Code Auditor...$(RESET)"
+	@printf "$(BOLD)$(YELLOW)🛡️ [NORM] Running 42 Norm & Clean Code Auditor...$(RESET)\n"
 	@$(PYTHON) scripts/norm_check.py
 
 compile:
-	@echo "\n$(BOLD)$(MAGENTA)⚡ [COMPILE] Verifying Python 3.10 syntax compilation...$(RESET)"
+	@printf "$(BOLD)$(MAGENTA)⚡ [COMPILE] Verifying Python 3.10 syntax compilation...$(RESET)\n"
 	@$(PYTHON) -m py_compile $$(find python_0_starting python_1_array -name "*.py")
-	@echo "$(GREEN)✔ Syntax compilation successful!$(RESET)"
+	@printf "$(GREEN)✔ Syntax compilation successful!$(RESET)\n"
 
 audit: compile norm test
-	@echo "\n$(BOLD)$(GREEN)======================================================================$(RESET)"
-	@echo "$(BOLD)$(GREEN)   ✅ FULL AUDIT COMPLETE: Code is compliant & ready for evaluation!   $(RESET)"
-	@echo "$(BOLD)$(GREEN)======================================================================$(RESET)\n"
+	@printf "\n$(BOLD)$(GREEN)======================================================================$(RESET)\n"
+	@printf "$(BOLD)$(GREEN)   ✅ FULL AUDIT COMPLETE: Code is compliant & ready for evaluation!   $(RESET)\n"
+	@printf "$(BOLD)$(GREEN)======================================================================$(RESET)\n\n"
 
 clean:
-	@echo "\n$(BOLD)$(RED)🧹 [CLEAN] Removing temporary cache files...$(RESET)"
+	@printf "$(BOLD)$(RED)🧹 [CLEAN] Removing temporary cache files...$(RESET)\n"
 	@find . -type d -name "__pycache__" -exec rm -rf {} +
 	@find . -type d -name ".pytest_cache" -exec rm -rf {} +
 	@find . -type f -name "*.pyc" -delete
-	@echo "$(GREEN)✔ Clean completed successfully.$(RESET)\n"
+	@printf "$(GREEN)✔ Clean completed successfully.$(RESET)\n\n"
