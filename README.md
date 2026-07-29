@@ -16,6 +16,7 @@
 ![Last commit](https://custom-icon-badges.demolab.com/github/last-commit/RogerioLS/Python_for_Data_Science-42sp?logo=history&color=dark-green)
 ![Repo size](https://custom-icon-badges.demolab.com/github/repo-size/RogerioLS/Python_for_Data_Science-42sp?logo=database)
 ![Languages](https://custom-icon-badges.demolab.com/github/languages/count/RogerioLS/Python_for_Data_Science-42sp?logo=command-palette&color=red)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 </div>
 
 A personal learning repository for the Python for Data Science piscine from École 42 São Paulo.
