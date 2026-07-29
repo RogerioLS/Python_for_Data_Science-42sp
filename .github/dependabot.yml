@@ -29,10 +29,6 @@ updates:
       prefix: "chore"
       include: "scope"
 
-    labels:
-      - "dependencies"
-      - "python"
-
   # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -52,7 +48,3 @@ updates:
     commit-message:
       prefix: "ci"
       include: "scope"
-
-    labels:
-      - "dependencies"
-      - "github-actions"
