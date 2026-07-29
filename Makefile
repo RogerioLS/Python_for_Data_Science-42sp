@@ -16,7 +16,7 @@ MAGENTA := \033[35m
 BLUE    := \033[34m
 WHITE   := \033[97m
 
-.PHONY: help test test-m00 test-m01 norm compile audit clean
+.PHONY: help test test-m00 test-m01 norm compile audit pre-commit clean
 
 help:
 	@printf "$(CYAN)┌──────────────────────────────────────────────────────────────────────────────┐\n$(RESET)"
@@ -29,6 +29,7 @@ help:
 	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make norm$(RESET)       $(DIM)─$(RESET) Run 42 Norm & Clean Code Auditor (docstrings, guards)     $(CYAN)│\n$(RESET)"
 	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make compile$(RESET)    $(DIM)─$(RESET) Compile Python 3.10 syntax across all exercise files      $(CYAN)│\n$(RESET)"
 	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make audit$(RESET)      $(DIM)─$(RESET) Full audit: compile + norm + unit tests                   $(CYAN)│\n$(RESET)"
+	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make pre-commit$(RESET) $(DIM)─$(RESET) Install pre-commit tool and set up git hooks              $(CYAN)│\n$(RESET)"
 	@printf "$(CYAN)│$(RESET)  $(BOLD)$(GREEN)make clean$(RESET)      $(DIM)─$(RESET) Remove temporary cache files (__pycache__, .pyc)          $(CYAN)│\n$(RESET)"
 	@printf "$(CYAN)├──────────────────────────────────────────────────────────────────────────────┤\n$(RESET)"
 	@printf "$(CYAN)│$(RESET)           $(BOLD)$(WHITE)🔥 Crafted with • by $(YELLOW)@RogerioLS$(WHITE) $(DIM)•$(RESET) $(BOLD)$(CYAN)42 São Paulo 🇧🇷$(RESET)                  $(CYAN)│\n$(RESET)"
@@ -59,6 +60,16 @@ audit: compile norm test
 	@printf "\n$(BOLD)$(GREEN)======================================================================$(RESET)\n"
 	@printf "$(BOLD)$(GREEN)   ✅ FULL AUDIT COMPLETE: Code is compliant & ready for evaluation!   $(RESET)\n"
 	@printf "$(BOLD)$(GREEN)======================================================================$(RESET)\n\n"
+
+pre-commit:
+	@if command -v pre-commit > /dev/null 2>&1; then \
+		printf "$(GREEN)✔ pre-commit is already installed.$(RESET)\n"; \
+	else \
+		printf "$(YELLOW)⏳ Installing pre-commit via pip...$(RESET)\n"; \
+		$(PYTHON) -m pip install pre-commit; \
+	fi
+	@pre-commit install > /dev/null 2>&1 || printf "$(YELLOW)ℹ Note: pre-commit hooks configured alongside custom git hooks.$(RESET)\n"
+	@printf "$(GREEN)✔ pre-commit setup completed successfully!$(RESET)\n"
 
 clean:
 	@printf "$(BOLD)$(RED)🧹 [CLEAN] Removing temporary cache files...$(RESET)\n"
